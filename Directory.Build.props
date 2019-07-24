@@ -1,0 +1,41 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+
+    <!-- aspnetcore-->
+    <AspNetCoreVersion>3.0.0-preview6.19307.2</AspNetCoreVersion>
+    <EFVersion>3.0.0-preview6.19304.10</EFVersion>
+    <AspNetCoreMvcAPIAnalyzerVersion>3.0.0-preview3-19153-02</AspNetCoreMvcAPIAnalyzerVersion>
+
+    <!-- netcore -->
+
+    <!-- sdk -->
+    <MediatRVersion>7.0.0</MediatRVersion>
+    <AutoMapperVersion>8.1.1</AutoMapperVersion>
+    <AutoMapperDIVersion>6.1.1</AutoMapperDIVersion>
+    <NSwagVersion>13.0.4</NSwagVersion>
+
+    <!-- tools -->
+
+
+  </PropertyGroup>
+
+  <!-- test -->
+  <PropertyGroup>
+
+    <MicrosoftTestSdkVersion>16.2.0</MicrosoftTestSdkVersion>
+    <xUnitVersion>2.4.1</xUnitVersion>
+    <XunitSkippableFactVersion>1.3.3</XunitSkippableFactVersion>
+    <FluentAssertionsVersion>5.6.0</FluentAssertionsVersion>
+    <MoqVersion>4.12.0</MoqVersion>
+    <CoverletVersion>2.3.2</CoverletVersion>
+    <ReportGeneratorVersion>4.0.4</ReportGeneratorVersion>
+
+  </PropertyGroup>
+
+</Project>
