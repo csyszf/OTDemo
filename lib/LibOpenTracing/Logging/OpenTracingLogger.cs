@@ -83,8 +83,7 @@ namespace LibOpenTracing.Logging
 
             bool eventAdded = false;
 
-            var structure = state as IEnumerable<KeyValuePair<string, object>>;
-            if (structure != null)
+            if (state is IEnumerable<KeyValuePair<string, object>> structure)
             {
 
                 foreach (KeyValuePair<string, object> property in structure)

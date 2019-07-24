@@ -14,7 +14,9 @@ namespace LibOpenTracing
         public static void SetException(this ISpan span, Exception exception)
         {
             if (span == null || exception == null)
+            {
                 return;
+            }
 
             span.SetTag(Tags.Error, true);
 
@@ -29,7 +31,9 @@ namespace LibOpenTracing
         public static ISpanBuilder WithBusinessId(this ISpanBuilder builder, string aid)
         {
             if (string.IsNullOrEmpty(aid))
+            {
                 throw new ArgumentException(nameof(aid));
+            }
 
             return builder.WithTag(OpenTracingConstants.BUSINESS_ID_TAG, aid);
         }
@@ -37,7 +41,9 @@ namespace LibOpenTracing
         public static ISpan SetBusinessId(this ISpan span, string aid)
         {
             if (string.IsNullOrEmpty(aid))
+            {
                 throw new ArgumentException(nameof(aid));
+            }
 
             return span.SetTag(OpenTracingConstants.BUSINESS_ID_TAG, aid);
         }

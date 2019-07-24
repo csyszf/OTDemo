@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LibMediator.Command
+﻿namespace LibMediator.Command
 {
     public class CommandResult
     {
+        public bool Succeed => true;
     }
 }
