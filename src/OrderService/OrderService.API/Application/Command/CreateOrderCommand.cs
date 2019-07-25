@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LibMediator.Command;
 
 namespace OrderService.API.Application.Command
@@ -27,6 +28,13 @@ namespace OrderService.API.Application.Command
 
         public IEnumerable<OrderItemDTO> OrderItems => _orderItems;
 
+        public class Handler : ICommandHandler<CreateOrderCommand>
+        {
+            public Task<CommandResult> Handle(CreateOrderCommand command)
+            {
+                return Task.FromResult(CommandResult.Ok);
+            }
+        }
     }
 
     public class OrderItemDTO

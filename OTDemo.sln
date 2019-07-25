@@ -21,21 +21,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.API", "src\Ord
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{D9D781A0-19C7-4D4F-8911-840C22D34BAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.API", "src\PaymentService\PaymentService.API\PaymentService.API.csproj", "{F9A6E342-D234-4294-95E3-9CE1FC5C10A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService.API", "src\PaymentService\PaymentService.API\PaymentService.API.csproj", "{F9A6E342-D234-4294-95E3-9CE1FC5C10A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockService.API", "src\StockService\StockService.API\StockService.API.csproj", "{BE1CF341-16D4-43F5-849E-6ED6DA14E55C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockService.API", "src\StockService\StockService.API\StockService.API.csproj", "{BE1CF341-16D4-43F5-849E-6ED6DA14E55C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AE14E0AB-351E-4F93-B52A-CDA7E08F653E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.API.Test", "src\OrderService\OrderService.API.Test\OrderService.API.Test.csproj", "{6063DEBC-FC46-44EC-90B4-0BD4C2931E75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.API.Test", "src\OrderService\OrderService.API.Test\OrderService.API.Test.csproj", "{6063DEBC-FC46-44EC-90B4-0BD4C2931E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.API.Test", "src\PaymentService\PaymentService.API.Test\PaymentService.API.Test.csproj", "{04E8FE67-38F9-4A92-A95F-F71A25B24491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService.API.Test", "src\PaymentService\PaymentService.API.Test\PaymentService.API.Test.csproj", "{04E8FE67-38F9-4A92-A95F-F71A25B24491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockService.API.Test", "src\StockService\StockService.API.Test\StockService.API.Test.csproj", "{5C1E21BA-67CE-409B-9C7A-EB48248498A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockService.API.Test", "src\StockService\StockService.API.Test\StockService.API.Test.csproj", "{5C1E21BA-67CE-409B-9C7A-EB48248498A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibOpenTracing", "lib\LibOpenTracing\LibOpenTracing.csproj", "{9A2062EB-F3C9-4B6F-83B0-C2D00208C66C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibMediator", "lib\LibMediator\LibMediator.csproj", "{67676100-F874-4B18-B38B-014853FDB338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibMediator", "lib\LibMediator\LibMediator.csproj", "{67676100-F874-4B18-B38B-014853FDB338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.IntegrationTest", "src\OrderService\OrderService.IntegrationTest\OrderService.IntegrationTest.csproj", "{50035399-8B3D-4D4A-8720-EF411F423FC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{67676100-F874-4B18-B38B-014853FDB338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67676100-F874-4B18-B38B-014853FDB338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67676100-F874-4B18-B38B-014853FDB338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50035399-8B3D-4D4A-8720-EF411F423FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50035399-8B3D-4D4A-8720-EF411F423FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50035399-8B3D-4D4A-8720-EF411F423FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50035399-8B3D-4D4A-8720-EF411F423FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{5C1E21BA-67CE-409B-9C7A-EB48248498A4} = {AE14E0AB-351E-4F93-B52A-CDA7E08F653E}
 		{9A2062EB-F3C9-4B6F-83B0-C2D00208C66C} = {D9D781A0-19C7-4D4F-8911-840C22D34BAE}
 		{67676100-F874-4B18-B38B-014853FDB338} = {D9D781A0-19C7-4D4F-8911-840C22D34BAE}
+		{50035399-8B3D-4D4A-8720-EF411F423FC2} = {AE14E0AB-351E-4F93-B52A-CDA7E08F653E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {824802F4-E318-42A4-BF0F-B420A1E5F549}

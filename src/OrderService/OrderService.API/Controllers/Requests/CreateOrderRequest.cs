@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
+using OrderService.API.Application.Command;
 
 namespace OrderService.API.Controllers.Requests
 {
@@ -32,7 +34,15 @@ namespace OrderService.API.Controllers.Requests
             public decimal? UnitPrice { get; set; }
 
             [Required]
-            public int? Units { get; private set; }
+            public int? Units { get; set; }
+        }
+        public class CreateOrderCommandProfile : Profile
+        {
+            public CreateOrderCommandProfile()
+            {
+                CreateMap<CreateOrderRequest, CreateOrderCommand>();
+                CreateMap<OrderItem, OrderItemDTO>();
+            }
         }
     }
 }

@@ -8,10 +8,10 @@
   <PropertyGroup>
 
     <!-- aspnetcore-->
-    <AspNetCoreVersion>3.0.0-preview6.19307.2</AspNetCoreVersion>
+    <AspNetCoreVersion>3.0.0-preview7.19365.7</AspNetCoreVersion>
     <EFVersion>3.0.0-preview6.19304.10</EFVersion>
     <AspNetCoreMvcAPIAnalyzerVersion>3.0.0-preview3-19153-02</AspNetCoreMvcAPIAnalyzerVersion>
-    <MicrosoftExtensionsVersion>3.0.0-preview6.19304.6</MicrosoftExtensionsVersion>
+    <MicrosoftExtensionsVersion>3.0.0-preview7.19362.4</MicrosoftExtensionsVersion>
 
     <!-- netcore -->
 
