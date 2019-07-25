@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using LibMediator.Command;
+using Microsoft.Extensions.Logging;
+using OrderService.Domain.AggregateModel.OrderAggregates;
 
 namespace OrderService.API.Application.Command
 {
     public class CreateOrderCommand : ICommand
     {
-        private readonly List<OrderItemDTO> _orderItems;
-
-        public CreateOrderCommand(List<OrderItemDTO>? orderItems, string? userId, string? userName, string? city, string? zipCode)
+        public CreateOrderCommand(Guid? userId, string? userName, string? city, string? zipCode, List<OrderItemDTO>? orderItems)
         {
-            _orderItems = orderItems ?? throw new ArgumentNullException(nameof(orderItems));
+            OrderItems = orderItems ?? throw new ArgumentNullException(nameof(orderItems));
             UserId = userId ?? throw new ArgumentNullException(nameof(userId));
             UserName = userName ?? throw new ArgumentNullException(nameof(userName));
             City = city ?? throw new ArgumentNullException(nameof(city));
             ZipCode = zipCode ?? throw new ArgumentNullException(nameof(zipCode));
         }
 
-        public string UserId { get; private set; }
+        public Guid UserId { get; private set; }
 
         public string UserName { get; private set; }
 
@@ -26,12 +27,24 @@ namespace OrderService.API.Application.Command
 
         public string ZipCode { get; private set; }
 
-        public IEnumerable<OrderItemDTO> OrderItems => _orderItems;
+        public List<OrderItemDTO> OrderItems { get; private set; }
 
         public class Handler : ICommandHandler<CreateOrderCommand>
         {
+            private readonly ILogger<Handler> _logger;
+            private readonly IMapper _mapper;
+
+            public Handler(ILogger<Handler> logger, IMapper mapper)
+            {
+                _logger = logger;
+                _mapper = mapper;
+            }
+
             public Task<CommandResult> Handle(CreateOrderCommand command)
             {
+                Order order = _mapper.Map<Order>(command);
+
+                _logger.LogInformation("Order record created with Id {0}", order.Id);
                 return Task.FromResult(CommandResult.Ok);
             }
         }
@@ -55,4 +68,14 @@ namespace OrderService.API.Application.Command
 
         public int Units { get; private set; }
     }
+
+    public class CreateOrderCommandToAggregate : Profile
+    {
+        public CreateOrderCommandToAggregate()
+        {
+            CreateMap<CreateOrderCommand, Order>();
+            CreateMap<OrderItemDTO, OrderItem>();
+        }
+    }
+
 }
