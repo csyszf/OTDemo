@@ -60,9 +60,8 @@ namespace OrderService.API
         private void ConfigureDatabase(IServiceCollection services)
         {
             services.AddDbContext<OrderDbContext>(options =>
-                    options.UseSqlServer(
-                        Configuration.GetConnectionString("DefaultConnection"))
-                    );
+                options.UseSqlite("DataSource=:memory:")
+                );
         }
 
         private void ConfigureServiceClients(IServiceCollection services)

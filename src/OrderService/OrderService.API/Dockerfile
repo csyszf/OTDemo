@@ -8,6 +8,7 @@ COPY ["src/OrderService/OrderService.API/OrderService.API.csproj", "src/OrderSer
 COPY ["src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj", "src/OrderService/OrderService.Infrastructure/"]
 COPY ["src/OrderService/OrderService.Domain/OrderService.Domain.csproj", "src/OrderService/OrderService.Domain/"]
 COPY ["lib/LibMediator/LibMediator.csproj", "lib/LibMediator/"]
+COPY ["lib/LibWebAPI/LibWebAPI.csproj", "lib/LibWebAPI/"]
 RUN dotnet restore "src/OrderService/OrderService.API/OrderService.API.csproj"
 COPY . .
 WORKDIR "/src/src/OrderService/OrderService.API"
