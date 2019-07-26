@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using LibMediator.Command;
 using Microsoft.Extensions.Logging;
+using OrderService.API.Infrastructure.Services;
 using OrderService.Domain.AggregatesModel.OrderAggregate;
 using OrderService.Infrastructure;
 
@@ -35,15 +36,18 @@ namespace OrderService.API.Application.Command
             private readonly ILogger<Handler> _logger;
             private readonly IMapper _mapper;
             private readonly OrderDbContext _context;
+            private readonly IStockService _stockService;
 
             public Handler(
-                ILogger<Handler> logger, 
+                ILogger<Handler> logger,
                 IMapper mapper,
-                OrderDbContext context)
+                OrderDbContext context,
+                IStockService stockService)
             {
                 _logger = logger;
                 _mapper = mapper;
                 _context = context;
+                _stockService = stockService;
             }
 
             public async Task<CommandResult> Handle(CreateOrderCommand command)
@@ -51,8 +55,9 @@ namespace OrderService.API.Application.Command
                 Order order = _mapper.Map<Order>(command);
 
                 await _context.AddAsync(order);
-
                 await _context.SaveChangesAsync();
+
+                await _stockService.HoldStock(order);
 
                 _logger.LogInformation("Order record created with Id {0}", order.Id);
                 return CommandResult.Ok;

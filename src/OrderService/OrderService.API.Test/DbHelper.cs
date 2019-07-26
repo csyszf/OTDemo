@@ -8,7 +8,7 @@ namespace OrderService.API.Test
     {
         private const string _connectionString = "DataSource=:memory:";
 
-        public static OrderDbContext GetInMemory([CallerFilePath] string callerName = "Unknown")
+        public static OrderDbContext GetInMemory([CallerMemberName] string callerName = "Unknown")
         {
             DbContextOptions<OrderDbContext> options = new DbContextOptionsBuilder<OrderDbContext>()
                 .UseInMemoryDatabase(callerName)

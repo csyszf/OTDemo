@@ -6,6 +6,8 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Moq;
+using OrderService.API.Infrastructure.Services;
 using OrderService.Infrastructure;
 
 namespace OrderService.IntegrationTest
@@ -28,6 +30,8 @@ namespace OrderService.IntegrationTest
 
             builder.ConfigureServices(services =>
             {
+
+                ConfigureServiceClients(services);
 
                 // EFCore add DbContextOptions by `TryAdd`
                 // and Startup's ConfigureServices is called before here
@@ -53,14 +57,17 @@ namespace OrderService.IntegrationTest
                     db.Database.EnsureCreated();
                 }
             });
-
         }
-
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
             _connection.Close();
+        }
+
+        private void ConfigureServiceClients(IServiceCollection services)
+        {
+            services.AddSingleton(Mock.Of<IStockService>());
         }
     }
 }

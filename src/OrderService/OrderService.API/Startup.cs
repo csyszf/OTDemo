@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrderService.API.Infrastructure.Services;
 using OrderService.Infrastructure;
 
 namespace OrderService.API
@@ -29,6 +31,8 @@ namespace OrderService.API
 
             services.AddMediator(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
+
+            ConfigureServiceClients(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +59,15 @@ namespace OrderService.API
                     options.UseSqlServer(
                         Configuration.GetConnectionString("DefaultConnection"))
                     );
+        }
+
+        private void ConfigureServiceClients(IServiceCollection services)
+        {
+            services.AddHttpClient("stock", client =>
+                {
+                    client.BaseAddress = new Uri(Configuration["Endpoints:StockService"]);
+                })
+                .AddTypedClient<IStockService, StockService>();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrderService.Domain.AggregatesModel.OrderAggregate;
 
 namespace OrderService.Infrastructure

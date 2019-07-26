@@ -26,7 +26,7 @@ namespace PaymentService.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapPost("/api/stock/hold", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });

@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddMediator(this IServiceCollection services, Type type)
         {
-            services.AddSingleton<IMediator, Mediator>();
+            services.AddScoped<IMediator, Mediator>();
 
             Assembly assembly = type.Assembly;
             RegisterCommandHandlers(services, assembly);

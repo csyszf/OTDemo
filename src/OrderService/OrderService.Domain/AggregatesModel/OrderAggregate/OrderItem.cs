@@ -8,19 +8,31 @@ namespace OrderService.Domain.AggregatesModel.OrderAggregate
         {
 
             if (productId == default)
+            {
                 throw new Exception("An order item must have a product Id");
+            }
+
             ProductId = productId;
 
             if (productName == default)
+            {
                 throw new Exception("An order item must have a product name");
+            }
+
             ProductName = productName ?? throw new ArgumentNullException(nameof(productName));
 
             if (unitPrice <= 0)
+            {
                 throw new Exception("An order item must have a positive unit price");
+            }
+
             UnitPrice = unitPrice;
 
             if (units <= 0)
+            {
                 throw new Exception("An order item must have a positive units");
+            }
+
             Units = units;
         }
 

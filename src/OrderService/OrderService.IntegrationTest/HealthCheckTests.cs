@@ -7,7 +7,7 @@ using Xunit;
 
 namespace OrderService.IntegrationTest
 {
-    public class HealthCheckTests: IClassFixture<WebApplicationFactory<Startup>>
+    public class HealthCheckTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
