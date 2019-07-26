@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\LibMediator\LibMediator.csproj" />
+    <ProjectReference Include="..\..\..\lib\LibWebAPI\LibWebAPI.csproj" />
     <ProjectReference Include="..\OrderService.Domain\OrderService.Domain.csproj" />
     <ProjectReference Include="..\OrderService.Infrastructure\OrderService.Infrastructure.csproj" />
   </ItemGroup>

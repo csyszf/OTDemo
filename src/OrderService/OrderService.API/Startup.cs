@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OrderService.API.Infrastructure.Services;
 using OrderService.Infrastructure;
 
@@ -13,12 +14,14 @@ namespace OrderService.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
+            Env = env;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -27,6 +30,7 @@ namespace OrderService.API
             services.AddControllers();
             services.AddHealthChecks();
 
+            ConfigureTracing(services);
             ConfigureDatabase(services);
 
             services.AddMediator(typeof(Startup));
@@ -45,8 +49,8 @@ namespace OrderService.API
 
             app.UseHealthChecks("/hc");
 
+            app.EnableTracing();
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -67,7 +71,14 @@ namespace OrderService.API
                 {
                     client.BaseAddress = new Uri(Configuration["Endpoints:StockService"]);
                 })
+                .WithTracing()
                 .AddTypedClient<IStockService, StockService>();
+        }
+
+        private void ConfigureTracing(IServiceCollection services)
+        {
+            services.AddOpenTracingLogger();
+            services.AddTracing(Env.ApplicationName, Configuration["Tracing:Endpoint"]);
         }
     }
 }

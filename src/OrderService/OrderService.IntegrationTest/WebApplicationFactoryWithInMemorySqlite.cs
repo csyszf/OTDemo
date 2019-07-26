@@ -50,12 +50,10 @@ namespace OrderService.IntegrationTest
 
                 ServiceProvider sp = services.BuildServiceProvider();
 
-                using (IServiceScope scope = sp.CreateScope())
-                {
-                    System.IServiceProvider scopedServices = scope.ServiceProvider;
-                    OrderDbContext db = scopedServices.GetRequiredService<OrderDbContext>();
-                    db.Database.EnsureCreated();
-                }
+                using IServiceScope scope = sp.CreateScope();
+                System.IServiceProvider scopedServices = scope.ServiceProvider;
+                OrderDbContext db = scopedServices.GetRequiredService<OrderDbContext>();
+                db.Database.EnsureCreated();
             });
         }
 
