@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderService.Domain.AggregateModel.OrderAggregates
+namespace OrderService.Domain.AggregatesModel.OrderAggregate
 {
     public class OrderItem
     {
@@ -23,6 +23,8 @@ namespace OrderService.Domain.AggregateModel.OrderAggregates
                 throw new Exception("An order item must have a positive units");
             Units = units;
         }
+
+        public Guid Id { get; private set; }
 
         public int ProductId { get; private set; }
 

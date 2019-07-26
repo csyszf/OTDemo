@@ -12,11 +12,11 @@ using Xunit;
 
 namespace OrderService.IntegrationTest.OrderTests
 {
-    public class WhenCreateOrder : IClassFixture<WebApplicationFactory<Startup>>
+    public class WhenCreateOrder : IClassFixture<WebApplicationFactoryWithInMemorySqlite<Startup>>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly WebApplicationFactoryWithInMemorySqlite<Startup> _factory;
 
-        public WhenCreateOrder(WebApplicationFactory<Startup> factory)
+        public WhenCreateOrder(WebApplicationFactoryWithInMemorySqlite<Startup> factory)
         {
             _factory = factory;
         }

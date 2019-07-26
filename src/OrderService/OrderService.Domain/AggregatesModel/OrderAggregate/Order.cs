@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OrderService.Domain.AggregateModel.OrderAggregates
+namespace OrderService.Domain.AggregatesModel.OrderAggregate
 {
     public class Order
     {
-        public Order(Guid userId, string userName, string city, string zipCode, ICollection<OrderItem> orderItems)
+
+        public Order(Guid userId, string userName, string city, string zipCode)
         {
             if (Guid.Empty == userId)
             {
@@ -35,6 +36,27 @@ namespace OrderService.Domain.AggregateModel.OrderAggregates
 
             ZipCode = zipCode;
 
+            Status = OrderStatus.Created;
+        }
+
+        public Guid Id { get; private set; }
+
+        public OrderStatus Status { get; private set; }
+
+        public Guid UserId { get; private set; }
+
+        public string UserName { get; private set; }
+
+        public string City { get; private set; }
+
+        public string ZipCode { get; private set; }
+
+        public ICollection<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
+
+
+        public static Order Create(Guid userId, string userName, string city, string zipCode, List<OrderItem> orderItems)
+        {
+            var order = new Order(userId, userName, city, zipCode);
 
             if (orderItems.Count == 0)
             {
@@ -45,20 +67,9 @@ namespace OrderService.Domain.AggregateModel.OrderAggregates
             {
                 throw new Exception("An order can only have less than 20 items");
             }
+            order.OrderItems = orderItems;
 
-            OrderItems = orderItems;
+            return order;
         }
-
-        public Guid Id { get; private set; }
-
-        public Guid UserId { get; private set; }
-
-        public string UserName { get; private set; }
-
-        public string City { get; private set; }
-
-        public string ZipCode { get; private set; }
-
-        public ICollection<OrderItem> OrderItems { get; private set; }
     }
 }

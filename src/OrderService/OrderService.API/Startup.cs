@@ -1,9 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrderService.Infrastructure;
+
 namespace OrderService.API
 {
     public class Startup
@@ -21,6 +24,9 @@ namespace OrderService.API
         {
             services.AddControllers();
             services.AddHealthChecks();
+
+            ConfigureDatabase(services);
+
             services.AddMediator(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
         }
@@ -41,6 +47,14 @@ namespace OrderService.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddDbContext<OrderDbContext>(options =>
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection"))
+                    );
         }
     }
 }
