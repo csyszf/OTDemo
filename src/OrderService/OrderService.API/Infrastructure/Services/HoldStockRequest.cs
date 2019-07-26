@@ -1,4 +1,6 @@
 ﻿using System;
+using AutoMapper;
+using OrderService.Domain.AggregatesModel.OrderAggregate;
 
 namespace OrderService.API.Infrastructure.Services
 {
@@ -10,6 +12,15 @@ namespace OrderService.API.Infrastructure.Services
         {
             public Guid ProductId { get; set; }
             public int Units { get; set; }
+        }
+
+        public class FromOrder: Profile
+        {
+            public FromOrder()
+            {
+                CreateMap<Order, HoldStockRequest>();
+                CreateMap<OrderItem, OrderStockItem>();
+            }
         }
     }
 }

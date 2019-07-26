@@ -2,11 +2,13 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OrderService.API.Application.Queries;
 using OrderService.API.Infrastructure.Services;
 using OrderService.Infrastructure;
 
@@ -14,6 +16,9 @@ namespace OrderService.API
 {
     public class Startup
     {
+
+        private readonly SqliteConnection _connection = new SqliteConnection("DataSource=:memory:");
+
         public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             Env = env;
@@ -35,6 +40,7 @@ namespace OrderService.API
 
             services.AddMediator(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IOrderQueries, OrderQueries>();
 
             ConfigureServiceClients(services);
         }
@@ -42,6 +48,10 @@ namespace OrderService.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            _connection.Open();
+            using IServiceScope scope = app.ApplicationServices.CreateScope();
+            scope.ServiceProvider.GetRequiredService<OrderDbContext>().Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,8 +70,7 @@ namespace OrderService.API
         private void ConfigureDatabase(IServiceCollection services)
         {
             services.AddDbContext<OrderDbContext>(options =>
-                options.UseSqlite("DataSource=:memory:")
-                );
+                options.UseSqlite(_connection));
         }
 
         private void ConfigureServiceClients(IServiceCollection services)

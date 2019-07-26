@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using LibMediator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OrderService.API.Application.Command;
+using OrderService.API.Application.Queries;
 using OrderService.API.Controllers.Requests;
+using OrderService.Domain.AggregatesModel.OrderAggregate;
 
 namespace OrderService.API.Controllers
 {
@@ -15,12 +18,27 @@ namespace OrderService.API.Controllers
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly IOrderQueries _queries;
 
-        public OrderController(ILogger<OrderController> logger, IMediator mediator, IMapper mapper)
+        public OrderController(ILogger<OrderController> logger, IMediator mediator, IMapper mapper, IOrderQueries queries)
         {
             _logger = logger;
             _mediator = mediator;
             _mapper = mapper;
+            _queries = queries;
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<Order>> Get(Guid id)
+        {
+            Order? order = await _queries.FindById(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return order;
         }
 
         [HttpPost]

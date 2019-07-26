@@ -7,9 +7,8 @@ services:
       context: .
       dockerfile: src/OrderService/OrderService.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - Endpoints__StockService="http://stockservice.api"
+      - Endpoints__StockService=http://stockservice.api
       - Tracing__Endpoint=jaeger
     ports:
       - "31001:80"
@@ -21,7 +20,6 @@ services:
       context: .
       dockerfile: src/StockService/StockService.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - Tracing__Endpoint=jaeger
     ports:
