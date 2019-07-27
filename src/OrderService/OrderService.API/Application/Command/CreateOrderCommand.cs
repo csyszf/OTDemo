@@ -54,7 +54,7 @@ namespace OrderService.API.Application.Command
             {
                 Order order = _mapper.Map<Order>(command);
 
-                await _context.AddAsync(order);
+                await _context.Orders.AddAsync(order);
                 await _context.SaveChangesAsync();
 
                 await _stockService.HoldStock(order);

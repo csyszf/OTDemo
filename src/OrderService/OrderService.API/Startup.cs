@@ -33,6 +33,7 @@ namespace OrderService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddHealthChecks();
 
             ConfigureTracing(services);
