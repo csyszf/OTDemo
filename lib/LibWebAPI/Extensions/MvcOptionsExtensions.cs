@@ -16,5 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<TraceActionFilter>();
             return services;
         }
+
+        public static IMvcBuilder TraceActions(this IMvcBuilder builder)
+        {
+            builder.Services.AddActionTracing();
+            return builder;
+        }
     }
 }
